@@ -7,17 +7,21 @@ export default function Partners({ dict }: { dict: Dict }) {
   return (
     <section id="partners" className="bg-parchment py-24 sm:py-28">
       <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <SectionHeading eyebrow={t.eyebrow} title={t.title} />
-        <div className="mt-14 grid gap-6 lg:grid-cols-2" data-reveal-group>
-          {blocks.map((block) => (
-            <div key={block.title} data-reveal-item className="rounded-xl border border-gray-200 bg-white p-8">
+        <SectionHeading eyebrow={t.eyebrow} title={t.title} align="start" size="sm" />
+        <div className="mt-12 grid gap-y-14 lg:grid-cols-2 lg:gap-x-16" data-reveal-group>
+          {blocks.map((block, i) => (
+            <div
+              key={block.title}
+              data-reveal-item
+              className={i === 1 ? "lg:border-s lg:border-gray-200 lg:ps-16" : ""}
+            >
               <h3 className="font-display text-xl font-semibold text-navy-900">{block.title}</h3>
-              <p className="mt-2 text-sm leading-relaxed text-ink-3">{block.desc}</p>
-              <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+              <p className="mt-2 max-w-md text-sm leading-relaxed text-ink-2">{block.desc}</p>
+              <ul className="mt-7 flex flex-wrap items-center gap-x-8 gap-y-4">
                 {block.items.map((name) => (
                   <li
                     key={name}
-                    className="flex min-h-16 items-center justify-center rounded-xl border border-gray-200 bg-parchment-2 px-4 py-3 text-center font-display text-[15px] font-medium text-ink-2"
+                    className="font-display text-lg font-medium text-ink-3 transition-colors duration-300 hover:text-navy-700"
                   >
                     {name}
                   </li>
