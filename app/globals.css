@@ -1,26 +1,188 @@
 @import "tailwindcss";
 
+/* ==========================================================
+   FONT ROUTING — locale-aware
+   ========================================================== */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --ff-display: var(--font-ebgaramond), Georgia, serif;
+  --ff-body: var(--font-plex), system-ui, sans-serif;
+}
+html[lang="ar"] {
+  --ff-display: var(--font-plex-arabic), var(--font-plex), sans-serif;
+  --ff-body: var(--font-plex-arabic), var(--font-plex), sans-serif;
 }
 
 @theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
+  /* ---------- Brand (navy) ---------- */
+  --color-navy-50: #f5f7fd;
+  --color-navy-100: #e7edfa;
+  --color-navy-200: #c9d6f4;
+  --color-navy-300: #a4baec;
+  --color-navy-400: #6f8fdd;
+  --color-navy-500: #21386e;
+  --color-navy-600: #1c315f;
+  --color-navy-700: #17294f;
+  --color-navy-800: #121f3d;
+  --color-navy-900: #0b1327;
+  --color-navy-950: #050914;
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+  /* ---------- Neutral ---------- */
+  --color-gray-50: #fafafa;
+  --color-gray-100: #f4f4f5;
+  --color-gray-200: #e4e4e7;
+  --color-gray-300: #d4d4d8;
+  --color-gray-400: #a1a1aa;
+  --color-gray-500: #71717a;
+  --color-gray-600: #52525b;
+  --color-gray-700: #3f3f46;
+  --color-gray-800: #27272a;
+  --color-gray-900: #18181b;
+  --color-gray-950: #09090b;
+
+  /* ---------- Accent: bronze (from yellow scale) ---------- */
+  --color-bronze-300: #ffe066;
+  --color-bronze-400: #ffd43b;
+  --color-bronze-500: #fab005;
+  --color-bronze-600: #f59f00;
+  --color-bronze-700: #e67700;
+  --color-bronze-800: #b45309;
+  --color-bronze-900: #78350f;
+
+  /* ---------- Status ---------- */
+  --color-success: #68b12d;
+  --color-warning: #ee8d43;
+  --color-danger: #fa5252;
+  --color-info: #009db3;
+
+  /* ---------- Semantic surfaces ---------- */
+  --color-parchment: #fcfbfa;
+  --color-parchment-2: #f8f8f7;
+  --color-parchment-3: #f2f2f1;
+  --color-surface: #ffffff;
+
+  /* ---------- Semantic text ---------- */
+  --color-ink: #18181b;
+  --color-ink-2: #3f3f46;
+  --color-ink-3: #71717a;
+
+  /* ---------- Fonts ---------- */
+  --font-display: var(--ff-display);
+  --font-sans: var(--ff-body);
+  --font-greek: var(--font-ebgaramond), Georgia, serif;
+
+  /* ---------- Motion ---------- */
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --animate-marquee: marquee 38s linear infinite;
+
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
   }
 }
 
+/* ==========================================================
+   BASE
+   ========================================================== */
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-parchment);
+  color: var(--color-ink);
+  font-family: var(--ff-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-kerning: normal;
+  font-feature-settings: "kern", "liga", "calt";
+  text-wrap: pretty;
+}
+
+/* ==========================================================
+   TYPOGRAPHY POLISH — modern rhythm + Arabic readability
+   ----------------------------------------------------------
+   Arabic script is cursive: it needs far more vertical
+   breathing room than Latin and must never carry Latin-style
+   letter-spacing. These rules are scoped to the Arabic locale
+   so the Latin (en) rhythm stays tight and modern.
+   ========================================================== */
+html[lang="ar"] {
+  line-height: 1.85;
+  letter-spacing: 0;
+  word-spacing: 0.01em;
+  font-feature-settings: "kern", "liga", "calt", "mark", "curs";
+}
+html[lang="ar"] :is(h1, h2, h3, h4, h5, h6) {
+  line-height: 1.35;
+}
+html[lang="ar"] :is(p, li) {
+  line-height: 1.85;
+}
+/* Neutralise Latin letter-spacing utilities on Arabic text */
+html[lang="ar"] [class*="tracking-"] {
+  letter-spacing: 0;
+}
+
+::selection {
+  background: var(--color-navy-500);
+  color: #fff;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-navy-500);
+  outline-offset: 2px;
+  border-radius: 2px;
+}
+
+/* RTL marquee runs the other way */
+html[dir="rtl"] .animate-marquee {
+  animation-direction: reverse;
+}
+
+/* ==========================================================
+   SIGNATURE TEXTURES
+   ========================================================== */
+
+/* Greek key (meander) horizontal rule: row of square-spiral motifs */
+.meander {
+  height: 10px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='10' viewBox='0 0 18 10' fill='none'%3E%3Cpath d='M1 9.25V1h12v8h-8V5h4' stroke='%23B45309' stroke-width='1.4'/%3E%3C/svg%3E");
+  background-repeat: repeat-x;
+  background-size: 18px 10px;
+}
+.meander-light {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='18' height='10' viewBox='0 0 18 10' fill='none'%3E%3Cpath d='M1 9.25V1h12v8h-8V5h4' stroke='%23FAB005' stroke-width='1.4'/%3E%3C/svg%3E");
+}
+
+/* Faint atmosphere for navy surfaces */
+.texture-navy {
+  background-image:
+    radial-gradient(1200px 600px at 70% -10%, rgba(111, 143, 221, 0.14), transparent 60%),
+    radial-gradient(900px 500px at 10% 110%, rgba(180, 83, 9, 0.1), transparent 55%);
+}
+
+/* Paper grain for parchment surfaces */
+.texture-paper {
+  background-image: radial-gradient(rgba(24, 24, 27, 0.028) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* Uncial Greek backdrop text */
+.greek-backdrop {
+  font-family: var(--font-ebgaramond), Georgia, serif;
+  user-select: none;
+  pointer-events: none;
+  line-height: 1.18;
+  letter-spacing: 0.04em;
+  word-break: normal;
+  overflow-wrap: anywhere;
+}
+
+/* Reveal elements start hidden only when JS + motion allowed */
+html.gsap-motion [data-reveal] {
+  opacity: 0;
+}
+
+/* Reduced motion: kill marquee drift */
+@media (prefers-reduced-motion: reduce) {
+  .animate-marquee {
+    animation: none;
+  }
 }
