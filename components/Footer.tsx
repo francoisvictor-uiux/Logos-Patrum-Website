@@ -15,7 +15,7 @@ export default function Footer({ dict, locale }: { dict: Dict; locale: Locale })
           {/* Brand */}
           <div>
             <div className="flex items-center gap-3">
-              <Image src="/images/logo.svg" alt="Logos Patrum" width={44} height={26} className="h-7 w-auto" />
+              <Image src="/images/logo-white.svg" alt="Logos Patrum" width={44} height={26} className="h-7 w-auto" />
               <span className="font-display text-xl font-semibold text-white">Logos Patrum</span>
             </div>
             <p className="mt-4 max-w-xs font-display text-lg leading-relaxed text-navy-100">{t.tagline}</p>

@@ -25,11 +25,12 @@ export default function Hero({ dict }: { dict: Dict }) {
     >
       {/* Full-bleed background */}
       <Image
-        src="/images/hero-bg.jpg"
+        src="/images/hero-bg.svg"
         alt=""
         aria-hidden
         fill
         priority
+        unoptimized
         sizes="100vw"
         className="object-cover object-center"
       />
@@ -80,10 +81,11 @@ export default function Hero({ dict }: { dict: Dict }) {
           >
             <div className="[transform:rotateY(16deg)_rotateX(6deg)] rtl:[transform:rotateY(-16deg)_rotateX(6deg)]">
               <Image
-                src="/images/hero-dashboard.png"
+                src="/images/hero-dashboard.svg"
                 alt=""
-                width={1828}
-                height={1414}
+                width={938}
+                height={731}
+                unoptimized
                 sizes="70vw"
                 className="w-full rounded-2xl shadow-[0_40px_120px_-20px_rgba(0,0,0,0.65)] ring-1 ring-white/10"
               />
